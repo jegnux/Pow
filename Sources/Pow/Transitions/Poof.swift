@@ -1,12 +1,20 @@
 import SwiftUI
 
 public extension AnyTransition.MovingParts {
+    
     /// A transition that removes the view in a dissolving cartoon style cloud.
     ///
     /// The transition is only performed on removal and takes 0.4 seconds.
     static var poof: AnyTransition {
+        poof()
+    }
+    
+    /// A transition that removes the view in a dissolving cartoon style cloud.
+    ///
+    /// The transition is only performed on removal and takes 0.4 seconds.
+    static func poof(insertion: AnyTransition = .identity) -> AnyTransition {
         .asymmetric(
-            insertion: .identity,
+            insertion: insertion,
             removal: .modifier(
                 active: Poof(animatableData: 0),
                 identity: Poof(animatableData: 1)

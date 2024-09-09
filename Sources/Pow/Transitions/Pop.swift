@@ -9,7 +9,7 @@ public extension AnyTransition.MovingParts {
     static var pop: AnyTransition {
         pop(.tint)
     }
-
+    
     /// A transition that shows a view with a ripple effect and a flurry of
     /// colored particles.
     ///
@@ -35,17 +35,17 @@ public extension AnyTransition.MovingParts {
     /// The transition is only performed on insertion.
     ///
     /// - Parameter style: The style to use for the effect.
-    static func pop<S: ShapeStyle>(_ style: S) -> AnyTransition {
+    static func pop<S: ShapeStyle>(_ style: S = .tint, removal: AnyTransition = .identity) -> AnyTransition {
         let pop = AnyTransition
             .modifier(
                 active:   Pop(style: AnyShapeStyle(style), animatableData: 0),
                 identity: Pop(style: AnyShapeStyle(style), animatableData: 1)
             )
             .animation(.linear(duration: 1.2))
-
+        
         return .asymmetric(
             insertion: pop,
-            removal: .identity
+            removal: removal
         )
     }
 }
